@@ -8,6 +8,7 @@ use App\Models\Report;
 use App\Jobs\CreateReport;
 use App\Jobs\SaveReport;
 use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
@@ -58,6 +59,18 @@ class ReportController extends Controller
         return response([
             'message' => 'Reporte enviado'
         ], 201);
+    }
+
+    /**
+     * Descargar reporte
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function download($id)
+    {
+        $report = Report::findOrFail($id);
+        return Storage::download($report->report_link);
     }
 
 }

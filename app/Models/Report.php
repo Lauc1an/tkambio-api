@@ -11,4 +11,7 @@ class Report extends Model
         'report_link'
     ];
 
+    protected $casts = [
+        'created_at' => 'date:d/m/Y',
+    ];
 }

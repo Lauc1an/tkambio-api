@@ -11,3 +11,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/generate-report', [ReportController::class, 'create']);
 Route::get('/get-report/{id}', [ReportController::class, 'show']);
 Route::get('/list-reports', [ReportController::class, 'index']);
+Route::get('/download-report/{id}', [ReportController::class, 'download']);
