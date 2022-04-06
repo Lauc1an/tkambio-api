@@ -16,16 +16,17 @@ class CreateReport implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $users;
-
+    private $filename;
     /**
      * Create a new job instance.
      *
      * @param  $users
      * @return void
      */
-    public function __construct($users)
+    public function __construct($users, $filename)
     {
         $this->users = $users;
+        $this->filename = $filename;
     }
 
     /**
@@ -35,9 +36,6 @@ class CreateReport implements ShouldQueue
      */
     public function handle()
     {
-        $time = date('d-m-Y_H-i-s');
-        $filename = "reporte_{$time}.xlsx";
-
-        Excel::store(new UsersExport($this->users), $filename);
+        Excel::store(new UsersExport($this->users), $this->filename);
     }
 }
