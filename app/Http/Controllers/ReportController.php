@@ -4,12 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Report;
 use App\Jobs\CreateReport;
 use App\Jobs\SaveReport;
 use Illuminate\Support\Facades\Bus;
 
 class ReportController extends Controller
 {
+    /**
+     * Mostrar todos los reportes
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return Report::all();
+    }
+
+    /**
+     * Mostrar un reporte específico
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return Report::findOrFail($id);
+    }
+
+    /**
+     * Crear reportes
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function create(Request $request)
     {
         $validated = $request->validate([
